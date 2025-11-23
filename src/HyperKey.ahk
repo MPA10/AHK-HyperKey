@@ -27,12 +27,12 @@
 ;
 ; CORE FEATURES OF THIS SCRIPT:
 ; ------------------------------
-; ✓ Vim-Style Navigation      - HyperKey + IJKL for cursor movement (no arrow keys needed)
+; ✓ Vim-Inspired Navigation   - HyperKey + IJKL for cursor movement (no arrow keys needed)
 ; ✓ Smart Text Manipulation   - Duplicate lines, smart delete, word-by-word movement
 ; ✓ Context-Aware Shortcuts   - Same key does different things in different apps
 ; ✓ Smart Wrapping            - Auto-pair quotes, brackets, parentheses with cursor positioning
 ; ✓ Clipboard Operations      - Quick cut/copy/paste/select-all on home row
-; ✓ Double-Tap Escape         - Quick double-tap on CapsLock sends Escape (perfect for Vim users)
+; ✓ Double-Tap Escape         - Quick double-tap on CapsLock sends Escape 
 ; ✓ App-Specific Enhancements - Custom shortcuts for VS Code, SSMS, Obsidian, Brave, and more
 ;
 ; KEYBOARD LAYOUT:
@@ -166,25 +166,27 @@ return
     =::Send, {Text}+ ; Plus sign
     `::Send, ~ ; Tilde (hyperkey + `)
 
-; QUOTES - Layout-independent (NL-qwerty and ENG-US-qwerty) with cursor positioning - Context-aware behavior
-    ':: ; HyperKey + ' for single quotes with cursor between them in all contexts except VS Code and Obsidian
+; QUOTES - Unicode Method (Bypasses keyboard layout and dead keys entirely)
+    ':: ; HyperKey + '
         if (WinActive("ahk_exe Code.exe") || WinActive("ahk_exe Obsidian.exe")) {
-            ; Send only single quote in VS Code and Obsidian
-            SendInput, '
+            ; Send Unicode Single Quote (U+0027)
+            SendInput, {U+0027}
         } else {
-            ; Insert '' everywhere and place cursor between quotes
-            SendInput, ''
+            ; Send two Unicode Single Quotes and move left
+            SendInput, {U+0027}{U+0027}
+            Sleep, 20 ; Short delay to ensure characters are placed before moving
             SendInput, {Left}
         }
     return
     
-    +':: ; HyperKey + Shift + ' for double quotes with cursor between them in all contexts except VS Code and Obsidian
+    +':: ; HyperKey + Shift + '
         if (WinActive("ahk_exe Code.exe") || WinActive("ahk_exe Obsidian.exe")) {
-            ; Send only double quote in VS Code and Obsidian
-            SendInput, "
+            ; Send Unicode Double Quote (U+0022)
+            SendInput, {U+0022}
         } else {
-            ; Insert "" everywhere and place cursor between quotes
-            SendInput, ""
+            ; Send two Unicode Double Quotes and move left
+            SendInput, {U+0022}{U+0022}
+            Sleep, 20 ; Short delay to ensure characters are placed before moving
             SendInput, {Left}
         }
     return
@@ -197,6 +199,7 @@ return
     } else {
         ; Insert () everywhere and place cursor between parentheses
         SendInput, ()
+        Sleep, 20 
         SendInput, {Left} ; Place cursor between parentheses
     }
     return
@@ -210,6 +213,7 @@ return
         } else {
             ; Insert {} everywhere and place cursor between brackets
             SendInput, {Text}{}
+            Sleep, 20 
             SendInput, {Left} ; Place cursor between brackets
         }
     return
@@ -222,6 +226,7 @@ return
         } else {
             ; Insert [] everywhere and place cursor between brackets
             SendInput, []
+            Sleep, 20 
             SendInput, {Left} ; Place cursor between brackets
         }
     return

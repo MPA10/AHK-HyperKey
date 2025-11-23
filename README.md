@@ -4,7 +4,20 @@ Transform CapsLock into a powerful modifier key. Perfect for macOS users switchi
 
 ## Why I Built This
 
-As a macOS user, I missed Karabiner-Elements' productivity on Windows. This script brings that same experience to AutoHotkey.
+As a long-time macOS user, I was accustomed to the incredible productivity of **Karabiner-Elements** - the ability to transform CapsLock into a powerful HyperKey that unlocks a complete secondary keyboard layer. When I switched to Windows for work, I immediately noticed a productivity gap: my hands constantly had to leave the home row for arrow keys, and I missed the consistent shortcuts I was used to on macOS.
+After extensive searching for Windows alternatives, I found that most existing AutoHotkey scripts were either too limited or awkward to use. I wanted the same seamless experience as Karabiner: a smart CapsLock that works both as a modifier and supports double-tap Escape, with context-aware behavior for different applications.
+This script is the result of that quest - a Windows equivalent that mimics the macOS productivity experience, powered by AutoHotkey. It combines the best of both worlds: the familiar Vim-inspired navigation, with Windows-specific optimizations for VS Code, SSMS, Obsidian, and other popular applications.
+
+## Table of Contents
+
+- [Quick Start](#quick-start)
+- [Basic Usage](#basic-usage-ansi-us-qwerty-layout)
+- [Practical Examples](#practical-examples)
+- [Real-World Usage](#real-world-usage)
+- [Advanced Features](#advanced-features)
+- [Visual Layout Reference](#visual-layout-reference)
+- [Auto-Start Configuration](#auto-start-configuration)
+- [Development (Optional)](#development-optional)
 
 ## Quick Start
 
@@ -15,7 +28,7 @@ As a macOS user, I missed Karabiner-Elements' productivity on Windows. This scri
 
 ## Basic Usage (Ansi US-QWERTY Layout)
 
-- **CapsLock + J/K/L/I** = Arrow keys (Vim-style)
+- **CapsLock + J/K/L/I** = Arrow keys (Vim-Inspired)
 - **CapsLock + H/;** = Word left/right
 - **CapsLock + U/O** = Line start/end
 - **CapsLock + X/C/V** = Cut/Copy/Paste
@@ -23,7 +36,7 @@ As a macOS user, I missed Karabiner-Elements' productivity on Windows. This scri
 - **Double-tap CapsLock** = Escape
 - **RShift + CapsLock** = Toggle real CapsLock
 
-Add Shift to any navigation key to select text while moving.
+Add `Shift` to any navigation key to select text while moving.
 
 ## Visual Layout Reference
 
@@ -78,8 +91,10 @@ Add Shift to any navigation key to select text while moving.
 ; ║  └───────────────────────────────────────────────────────────┘   ║
 ; ║                                                                  ║
 ; ║  ┌─ SYMBOLS (Number Row) ────────────────────────────────────┐   ║
-; ║  │  CapsLock + [1-0] = !@#$%^&*()    CapsLock + [-] = _      │   ║
-; ║  │  CapsLock + [=] = +    CapsLock + [`] = ~                 │   ║
+; ║  │  CapsLock + [`] = ~                                       │   ║
+; ║  │  CapsLock + [1-0] = !@#$%^&*()                            │   ║
+; ║  │  CapsLock + [-] = _                                       │   ║
+; ║  │  CapsLock + [=] = +                                       │   ║
 ; ║  └───────────────────────────────────────────────────────────┘   ║
 ; ║                                                                  ║
 ; ╚══════════════════════════════════════════════════════════════════╝
@@ -103,7 +118,7 @@ Add Shift to any navigation key to select text while moving.
 - **Writing documents:** Keep hands on home row, no more reaching for arrow keys
 - **Coding:** Duplicate lines, toggle comments, navigate code efficiently  
 - **Web browsing:** Navigate back/forward without mouse
-- **SQL development:** Execute queries and insert templates instantly
+- **SQL development:** Execute queries, insert templates instantly and comment out selected code
 
 ## Advanced Features
 
