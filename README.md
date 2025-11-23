@@ -1,6 +1,6 @@
 # HyperKey for Windows
 
-Transform CapsLock into a powerful modifier key. Perfect for macOS users switching to Windows.
+Hijack your CapsLock: transform your keyboard with powerful navigation, editing, and productivity shortcuts.
 
 ## Why I Built This
 
@@ -187,6 +187,14 @@ Add `Shift` to any navigation key to select text while moving.
 ## Development (Optional)
 
 For editing, use VS Code with AHK++ extension for syntax highlighting and IntelliSense.
+
+---
+
+## Support
+
+If you find this project useful, consider buying me a coffee!
+
+[![Buy Me a Coffee](https://img.buymeacoffee.com/button-api/?text=Buy%20me%20a%20coffee&emoji=☕&slug=mikepattyn&button_colour=FFDD00&font_colour=000000&font_family=Arial&outline_colour=000000&coffee_colour=black)](https://buymeacoffee.com/mikepattyn)
 
 ---
 
