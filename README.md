@@ -32,7 +32,9 @@ This script is the result of that quest - a Windows equivalent that mimics the m
 - **CapsLock + H/;** = Word left/right
 - **CapsLock + U/O** = Line start/end
 - **CapsLock + X/C/V** = Cut/Copy/Paste
-- **CapsLock + D** = Duplicate line (VS Code, SSMS, Obsidian)
+- **CapsLock + Z** = Undo | **CapsLock + Shift+Z** = Redo
+- **CapsLock + Shift+V** = Open clipboard history (Win+V)
+- **CapsLock + D** = Duplicate line (VS Code, SSMS, Obsidian, Visual Studio)
 - **Double-tap CapsLock** = Escape
 - **RShift + CapsLock** = Toggle real CapsLock
 
@@ -78,6 +80,10 @@ Add `Shift` to any navigation key to select text while moving.
 ; ║  │  CapsLock + [V] = Paste                                   │   ║
 ; ║  │  CapsLock + [A] = Select All                              │   ║
 ; ║  │                                                           │   ║
+; ║  │  UNDO & REDO:                                             │   ║
+; ║  │  CapsLock + [Z] = Undo                                    │   ║
+; ║  │  CapsLock + Shift + [Z] = Redo                            │   ║
+; ║  │                                                           │   ║
 ; ║  │  SMART FEATURES:                                          │   ║
 ; ║  │  CapsLock + ['] = ''                                      │   ║
 ; ║  │  CapsLock + Shift + ['] = ""                              │   ║
@@ -112,11 +118,28 @@ Add `Shift` to any navigation key to select text while moving.
 ## Practical Examples
 
 ### App-Specific Features
-- **In VS Code:** CapsLock+D duplicates current line, CapsLock+/ toggles comments
-- **In SSMS:** CapsLock+R executes query, CapsLock+Shift+0 creates SQL template  
-- **In Obsidian:** CapsLock+Alt+J/L navigates between headers, CapsLock+Ctrl+I/K folds sections
-- **In File Explorer:** CapsLock+Alt+I/K/J/L replaces Up/Down/Back/Forward buttons
-- **In Brave:** CapsLock+Ctrl+J/L replaces browser back/forward buttons
+- **VS Code:** 
+  - CapsLock+D duplicates line
+  - CapsLock+/ toggles comments
+  - CapsLock+Alt+I/K moves line up/down
+- **Visual Studio:** 
+  - CapsLock+D duplicates line
+  - CapsLock+/ toggles comments
+  - CapsLock+Alt+I/K moves line up/down
+- **SSMS:** 
+  - CapsLock+R executes query
+  - CapsLock+Shift+0 inserts SELECT-FROM-WHERE template
+  - CapsLock+/ smart comment toggle (detects if already commented)
+- **Obsidian:** 
+  - CapsLock+D duplicates line
+  - CapsLock+Alt+J/L navigates between headers
+  - CapsLock+Ctrl+I/K folds/unfolds sections
+  - CapsLock+Ctrl+Enter opens link under cursor
+  - CapsLock+Shift+Ctrl+Enter opens link in new tab
+- **File Explorer:** 
+  - CapsLock+Alt+I/K/J/L navigates Up/Down/Back/Forward
+- **Brave Browser:** 
+  - CapsLock+Ctrl+J/L navigates back/forward
 
 ### Universal Examples (Works Everywhere)
 - **Text editing:** CapsLock+J/K/L/I for navigation, CapsLock+X/C/V for clipboard
