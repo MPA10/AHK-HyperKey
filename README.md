@@ -4,6 +4,23 @@ Hijack your CapsLock: transform your keyboard with powerful navigation, editing,
 
 ---
 
+## Table of Contents
+
+- [Why I Built This](#why-i-built-this)
+- [Quick Version Selection](#quick-version-selection)
+- [Quick Start](#quick-start)
+- [Basic Usage](#basic-usage-ansi-us-qwerty-layout)
+- [Visual Layout Reference](#visual-layout-reference)
+- [Practical Examples](#practical-examples)
+- [Real-World Usage](#real-world-usage)
+- [Advanced Features](#advanced-features)
+- [Auto-Start Configuration](#auto-start-configuration)
+- [Version-Specific Documentation](#version-specific-documentation)
+- [Version Comparison](#version-comparison)
+- [Support](#support)
+
+---
+
 ## Why I Built This
 
 As a long-time macOS user, I was accustomed to the incredible productivity of **Karabiner-Elements** - the ability to transform CapsLock into a powerful HyperKey that unlocks a complete secondary keyboard layer. When I switched to Windows for work, I immediately noticed a productivity gap: my hands constantly had to leave the home row for arrow keys, and I missed the consistent shortcuts I was used to on macOS.
