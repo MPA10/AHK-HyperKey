@@ -91,6 +91,19 @@
 ; CapsLock = CapsLock
 ;
 ; ================================================================================================
+; APPLICATION VARIABLES
+; ================================================================================================
+; Define application executable names here for easy maintenance.
+; To add a new app, simply add a new variable and use it in the #HotIf conditions.
+
+APP_VSCODE := "ahk_exe Code.exe"
+APP_VISUAL_STUDIO := "ahk_exe devenv.exe"
+APP_OBSIDIAN := "ahk_exe Obsidian.exe"
+APP_EXPLORER := "ahk_exe explorer.exe"
+APP_BRAVE := "ahk_exe brave.exe"
+APP_SSMS := "ahk_exe Ssms.exe"
+
+; ================================================================================================
 ; HYPERKEY CONFIGURATION (CapsLock as HyperKey)
 ; ================================================================================================
 ; CapsLock hold activates HyperKey functionality:
@@ -187,7 +200,7 @@ CheckCapsLock()
 ; - VS Code & Obsidian: These apps have their own "auto-close" features, so we only send a single quote to avoid duplication.
 '::
 {
-    if (WinActive("ahk_exe Code.exe") || WinActive("ahk_exe Obsidian.exe"))
+    if (WinActive(APP_VSCODE) || WinActive(APP_OBSIDIAN))
     {
         ; Send Unicode Single Quote (U+0027)
         Send("{U+0027}") 
@@ -203,7 +216,7 @@ CheckCapsLock()
 
 +':: ; HyperKey + Shift + '
 {
-    if (WinActive("ahk_exe Code.exe") || WinActive("ahk_exe Obsidian.exe"))
+    if (WinActive(APP_VSCODE) || WinActive(APP_OBSIDIAN))
     {
         ; Send Unicode Double Quote (U+0022) ; Send double quote only
         Send("{U+0022}")
@@ -220,7 +233,7 @@ CheckCapsLock()
 ; PARENTHESES - Context-aware behavior
 9:: ; Place parentheses and cursor inside in all contexts except VS Code, Visual Studio, and Obsidian
 {   
-    if (WinActive("ahk_exe Code.exe") || WinActive("ahk_exe devenv.exe") || WinActive("ahk_exe Obsidian.exe"))
+    if (WinActive(APP_VSCODE) || WinActive(APP_VISUAL_STUDIO) || WinActive(APP_OBSIDIAN))
     {
         ; Send only opening parenthesis in Visual Studio, VS Code, and Obsidian
         Send("(") 
@@ -238,7 +251,7 @@ CheckCapsLock()
 ; Curly brackets {} with HyperKey
 +[:: ; Place curly brackets and cursor inside in all contexts except VS Code, Visual Studio, and Obsidian
 {
-    if (WinActive("ahk_exe Code.exe") || WinActive("ahk_exe devenv.exe") || WinActive("ahk_exe Obsidian.exe"))
+    if (WinActive(APP_VSCODE) || WinActive(APP_VISUAL_STUDIO) || WinActive(APP_OBSIDIAN))
     {
         ; Send only opening curly bracket in Visual Studio, VS Code, and Obsidian
         Send("{")
@@ -255,7 +268,7 @@ CheckCapsLock()
 ; Square brackets [] with HyperKey
 [:: ; Place square brackets and cursor inside in all contexts except VS Code, Visual Studio, and Obsidian
 {
-    if (WinActive("ahk_exe Code.exe") || WinActive("ahk_exe devenv.exe") || WinActive("ahk_exe Obsidian.exe"))
+    if (WinActive(APP_VSCODE) || WinActive(APP_VISUAL_STUDIO) || WinActive(APP_OBSIDIAN))
     {
         ; Send only opening square bracket in Visual Studio, VS Code, and Obsidian
         Send("[")
@@ -423,14 +436,14 @@ g::return
 ; BLOCKING FOR OTHER APPLICATIONS
 ; ================================================================================================
 ; Block specific keys in applications where they should not have functionality
-#HotIf GetKeyState("CapsLock", "P") && !WinActive("ahk_exe Code.exe") && !WinActive("ahk_exe devenv.exe") && !WinActive("ahk_exe Obsidian.exe")
+#HotIf GetKeyState("CapsLock", "P") && !WinActive(APP_VSCODE) && !WinActive(APP_VISUAL_STUDIO) && !WinActive(APP_OBSIDIAN)
 d::return ; Block d in all other applications except VS Code, Visual Studio, and Obsidian
 #HotIf
 
 ; ================================================================================================
 ; VISUAL STUDIO CODE SPECIFIC COMBINATIONS
 ; ================================================================================================
-#HotIf GetKeyState("CapsLock", "P") && WinActive("ahk_exe Code.exe") ; VS Code active
+#HotIf GetKeyState("CapsLock", "P") && WinActive(APP_VSCODE) ; VS Code active
 d::Send("+!{Down}") ; HyperKey + D: Duplicate line (Like default shortcut Shift + Alt + Down)
 /::Send("^/") ; HyperKey + /: Toggle comment (Ctrl + /)
 !i::SendInput("{Alt Down}{Up}{Alt Up}") ; HyperKey + Alt + I: Move line up
@@ -440,7 +453,7 @@ d::Send("+!{Down}") ; HyperKey + D: Duplicate line (Like default shortcut Shift 
 ; ================================================================================================
 ; VISUAL STUDIO SPECIFIC COMBINATIONS  
 ; ================================================================================================
-#HotIf GetKeyState("CapsLock", "P") && WinActive("ahk_exe devenv.exe") ; Visual Studio active
+#HotIf GetKeyState("CapsLock", "P") && WinActive(APP_VISUAL_STUDIO) ; Visual Studio active
 d::Send("^d") ; HyperKey + D: Duplicate line (Ctrl + D)
 /::Send("^/") ; HyperKey + /: Toggle comment (Ctrl + /)
 !i::SendInput("{Alt Down}{Up}{Alt Up}") ; HyperKey + Alt + I: Move line up
@@ -450,7 +463,7 @@ d::Send("^d") ; HyperKey + D: Duplicate line (Ctrl + D)
 ; ================================================================================================
 ; OBSIDIAN SPECIFIC COMBINATIONS
 ; ================================================================================================
-#HotIf GetKeyState("CapsLock", "P") && WinActive("ahk_exe Obsidian.exe") ; Obsidian active
+#HotIf GetKeyState("CapsLock", "P") && WinActive(APP_OBSIDIAN) ; Obsidian active
 ; Line operations
 d::Send("^d") ; HyperKey + D: Duplicate line (Ctrl + D)
 !i::Send("!{Up}") ; HyperKey + Alt + I: Move line up (Alt + Up)
@@ -474,7 +487,7 @@ d::Send("^d") ; HyperKey + D: Duplicate line (Ctrl + D)
 ; ================================================================================================
 ; WINDOWS FILE EXPLORER SPECIFIC COMBINATIONS
 ; ================================================================================================
-#HotIf GetKeyState("CapsLock", "P") && WinActive("ahk_exe explorer.exe") ; File Explorer active
+#HotIf GetKeyState("CapsLock", "P") && WinActive(APP_EXPLORER) ; File Explorer active
 !i::Send("!{Up}") ; HyperKey + Alt + I: Up in folder structure (Alt + Up)
 !k::Send("!{Down}") ; HyperKey + Alt + K: Down in folder structure (Alt + Down)
 !j::Send("!{Left}") ; HyperKey + Alt + J: Navigate back (Alt + Left)
@@ -484,7 +497,7 @@ d::Send("^d") ; HyperKey + D: Duplicate line (Ctrl + D)
 ; ================================================================================================
 ; BRAVE BROWSER SPECIFIC COMBINATIONS
 ; ================================================================================================
-#HotIf GetKeyState("CapsLock", "P") && WinActive("ahk_exe brave.exe") ; Brave browser active
+#HotIf GetKeyState("CapsLock", "P") && WinActive(APP_BRAVE) ; Brave browser active
 ^j::Send("!{Left}") ; HyperKey + Ctrl + J: Navigate back (Alt + Left)
 ^l::Send("!{Right}") ; HyperKey + Ctrl + L: Navigate forward (Alt + Right)
 #HotIf
@@ -492,7 +505,7 @@ d::Send("^d") ; HyperKey + D: Duplicate line (Ctrl + D)
 ; ================================================================================================
 ; SQL SERVER MANAGEMENT STUDIO (SSMS) SPECIFIC COMBINATIONS
 ; ================================================================================================
-#HotIf GetKeyState("CapsLock", "P") && WinActive("ahk_exe Ssms.exe") ; SSMS active
+#HotIf GetKeyState("CapsLock", "P") && WinActive(APP_SSMS) ; SSMS active
 
 ; Line manipulation
 !i::SendInput("{Alt Down}{Up}{Alt Up}") ; HyperKey + Alt + I: Move line up
