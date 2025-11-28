@@ -8,7 +8,7 @@
 ; 88""Yb   8P       .8.8.8.     88YbdP88 88 88"Yb  88""   88"""   dP__Yb    88 Yb   dP 
 ; 88oodP  dP           "        88 YY 88 88 88  Yb 888888 88     dP""""Yb   88  YbodP  
 ;
-; HyperKey Script Version: 2.1.0
+; HyperKey Script Version: 2.1.1
 ; Compatible with AutoHotkey v2.0+
 ;
 ; ================================================================================================
@@ -78,7 +78,7 @@
 ;
 ; AUTHOR: Mike Pattyn
 ; LICENSE: MIT - Free to use and modify
-; VERSION: 2.1.0
+; VERSION: 2.1.1
 ; LAST UPDATED: November 2025
 ;
 ; ================================================================================================
@@ -227,17 +227,9 @@ CleanupTimers()
 ; - Native Behavior: Normal typing (without HyperKey) retains dead key functionality for accents.
 ;
 ; - VS Code & Obsidian: These apps have their own "auto-close" features, so we only send a single quote to avoid duplication.
-'::
-{
-    if (IsShiftPressed())
-    {
-        InsertPair("{U+0022}", "{U+0022}") ; Shift + '
-    }
-    else
-    {
-        InsertPair("{U+0027}", "{U+0027}")
-    }
-}
+':: InsertPair("{U+0027}", "{U+0027}") ; Single quote (') - pairs in non-editor contexts
+
++':: InsertPair("{U+0022}", "{U+0022}") ; Shift + ' (double-quote) - pairs as "" with cursor in non-editor contexts
 
 ; PARENTHESES - Context-aware behavior
 9:: InsertPair("(", ")") ; Place parentheses and cursor inside (context-aware)
@@ -404,8 +396,8 @@ r::Send("{F5}") ; HyperKey + R: Execute query (F5)
     SendInput("{Up}") ; Move cursor back to FROM line
 }
 
-; Quotes - HyperKey + ' for double quotes with cursor between them
-':: InsertPair("{U+0027}", "{U+0027}")
+; Quotes - we rely on the global ':: handler above which handles Shift internally for both single and double quotes
+; (Removed SSMS-specific ':: duplicate so global behavior applies across all apps)
 
 ; Smart comment toggle - HyperKey + /
 /::
