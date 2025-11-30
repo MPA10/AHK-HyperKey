@@ -18,6 +18,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## HyperKey [2.1.1] - 2025-11-28
 
+### Added
+- Improved double-tap CapsLock responsiveness: Escape is now sent immediately on the second tap
+- New `InsertPair` helper function for consistent quote and bracket handling
+
 ### Fixed
 - Fixed duplicate hotkey error by separating single quote (`'::`) and double quote (`+'::`) into distinct hotkeys
 - Removed SSMS-specific quote handler that caused conflicts with global quote handling
@@ -35,8 +39,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Added version comments to all script files for clarity
 - Fixed version references in script headers
 - Improved changelog formatting and consistency
-- Improved double-tap CapsLock responsiveness: Escape is now sent immediately on the second tap
-- Refactored quote and bracket handling to use a new `InsertPair` helper function for consistency
 
 ### Fixed
 - Corrected incorrect version references in v1.1 script header

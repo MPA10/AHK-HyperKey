@@ -164,6 +164,7 @@ Add `Shift` to any navigation key to select text while moving.
 - **CapsLock+D** duplicates line
 - **CapsLock+/** toggles comments
 - **CapsLock+Alt+I/K** moves line up/down
+- **CapsLock+E** focuses/unfocuses Explorer sidebar
 
 #### Visual Studio
 - **CapsLock+D** duplicates line
