@@ -10,6 +10,7 @@
 ;
 ; HyperKey Script Version: 2.1.1
 ; Compatible with AutoHotkey v2.0+
+#Requires AutoHotkey v2.0
 ;
 ; ================================================================================================
 ; HYPERKEY WINDOWS SCRIPT v2.0 - Advanced Keyboard Productivity Enhancement
