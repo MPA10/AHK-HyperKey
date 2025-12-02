@@ -8,7 +8,7 @@
 ; 88""Yb   8P       .8.8.8.     88YbdP88 88 88"Yb  88""   88"""   dP__Yb    88 Yb   dP 
 ; 88oodP  dP           "        88 YY 88 88 88  Yb 888888 88     dP""""Yb   88  YbodP  
 ;
-; HyperKey Script Version: 2.1.1
+; HyperKey Script Version: 2.1.2
 ; Compatible with AutoHotkey v2.0+
 #Requires AutoHotkey v2.0
 ;
@@ -79,8 +79,8 @@
 ;
 ; AUTHOR: Mike Pattyn
 ; LICENSE: MIT - Free to use and modify
-; VERSION: 2.1.1
-; LAST UPDATED: November 2025
+; VERSION: 2.1.2
+; LAST UPDATED: December 2025
 ;
 ; ================================================================================================
 ; AutoHotkey v2.0 Syntax - MODIFIER KEYS REFERENCE 
@@ -222,9 +222,10 @@ CleanupTimers()
 ; - US-QWERTY: Quotes are immediate keys.
 ;
 ; The Solution:
-; - HyperKey + ' or " uses Unicode to bypass layout specifics, ensuring consistent behavior.
+; - HyperKey + ' or " bypasses layout specifics, ensuring consistent behavior.
 ; - Inserts paired quotes ('') and places cursor inside, regardless of active layout.
-; - Context-Aware: Sends single quote in apps with auto-close (VS Code, Obsidian).
+; - Context-Aware: Sends single character in apps with auto-close (VS Code, Obsidian).
+; - Uses clipboard method for reliable insertion in all applications.
 ; - Native Behavior: Normal typing (without HyperKey) retains dead key functionality for accents.
 ;
 ; - VS Code & Obsidian: These apps have their own "auto-close" features, so we only send a single quote to avoid duplication.
@@ -240,21 +241,25 @@ InsertPair(openChar, closeChar)
 {
     if (WinActive(APP_VSCODE) || WinActive(APP_OBSIDIAN) || WinActive(APP_VISUAL_STUDIO))
     {
-        ; Use Send for editor-specific behavior
-        Send(openChar)
+        ; In editors with auto-close, send only the opening character
+        SendText(openChar)
     }
     else
     {
-        ; Use SendEvent for maximum reliability with longer delays
-        SendEvent(openChar closeChar)
-        Sleep(150)  ; Longer delay for reliability
-        SendEvent("{Left}")
+        ; In other apps, insert both characters and move cursor between them
+        ; Use clipboard method for maximum reliability across all applications
+        ClipSaved := A_Clipboard
+        A_Clipboard := openChar . closeChar
+        Send("^v")
+        Sleep(30)
+        Send("{Left}")
+        A_Clipboard := ClipSaved
     }
 }
 
 ':: InsertPair("'", "'") ; Single quote (') - pairs in non-editor contexts
 
-+':: InsertPair('"', '"') ; Shift + ' (double-quote) - pairs as "" with cursor in non-editor contexts
++':: InsertPair("`"", "`"") ; Shift + ' (double-quote) - pairs as "" with cursor in non-editor contexts
 
 ; PARENTHESES - Context-aware behavior
 9:: InsertPair("(", ")") ; Place parentheses and cursor inside (context-aware)

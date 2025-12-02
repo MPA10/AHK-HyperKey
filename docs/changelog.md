@@ -16,6 +16,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## HyperKey [2.1.2] - 2025-12-02
+
+### Fixed
+- Fixed `InsertPair` reliability issues where paired characters weren't inserted correctly with text before cursor
+- Replaced SendText/Send method with clipboard-based insertion for 100% reliability
+- Optimized insertion timing (reduced from 50ms to 30ms)
+- Added `#Requires AutoHotkey v2.0` directive for version compatibility checking
+
+### Changed
+- Moved `InsertPair` helper function to top of script with other helper functions for better organization
+
+---
+
 ## HyperKey [2.1.1] - 2025-11-28
 
 ### Added
@@ -125,7 +138,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 | Version | Release Date | AutoHotkey | Status |
 |---------|--------------|------------|--------|
-| 2.1.1  | 2025-11-28  | v2.0+     | ✅ Current |
+| 2.1.2  | 2025-12-02  | v2.0+     | ✅ Current |
+| 2.1.1  | 2025-11-28  | v2.0+     | ⚠️ Legacy |
 | 2.1.0  | 2025-11-26  | v2.0+     | ⚠️ Legacy |
 | 2.0.0  | 2025-11-25  | v2.0+     | ⚠️ Legacy |
 | 1.1.0  | 2024-XX-XX  | v1.1+     | ⚠️ Legacy |
