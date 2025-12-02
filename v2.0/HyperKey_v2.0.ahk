@@ -245,19 +245,12 @@ InsertPair(openChar, closeChar)
     }
     else
     {
-        ; Use SendEvent for maximum reliability - slower but more dependable
-        if (openChar = "{" && closeChar = "}")
-        {
-            SendEvent("{}")
-            Sleep(100)  ; Longer delay for reliability
-            SendEvent("{Left}")
-        }
-        else
-        {
-            SendEvent(openChar closeChar)
-            Sleep(100)  ; Longer delay for reliability
-            SendEvent("{Left}")
-        }
+        ; Use SendEvent for maximum reliability - simulates actual keystrokes
+        SendEvent(openChar)
+        Sleep(100)  ; Longer delay for SendEvent
+        SendEvent(closeChar)
+        Sleep(100)  ; Longer delay for SendEvent
+        SendEvent("{Left}")
     }
 }
 
