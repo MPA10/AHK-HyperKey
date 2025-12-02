@@ -245,18 +245,18 @@ InsertPair(openChar, closeChar)
     }
     else
     {
-        ; For curly braces, use SendText to avoid Send special character parsing issues
+        ; Use SendEvent for maximum reliability - slower but more dependable
         if (openChar = "{" && closeChar = "}")
         {
-            SendText("{}")
-            Sleep(50)  ; Increased delay for reliability
-            SendInput("{Left}")
+            SendEvent("{}")
+            Sleep(100)  ; Longer delay for reliability
+            SendEvent("{Left}")
         }
         else
         {
-            SendInput(openChar closeChar)
-            Sleep(50)  ; Increased delay for reliability
-            SendInput("{Left}")
+            SendEvent(openChar closeChar)
+            Sleep(100)  ; Longer delay for reliability
+            SendEvent("{Left}")
         }
     }
 }
