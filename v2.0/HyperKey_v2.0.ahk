@@ -228,6 +228,39 @@ CleanupTimers()
 ; - Native Behavior: Normal typing (without HyperKey) retains dead key functionality for accents.
 ;
 ; - VS Code & Obsidian: These apps have their own "auto-close" features, so we only send a single quote to avoid duplication.
+
+
+; Insert a paired character (quotes, brackets, parentheses) depending on app context.
+; In editors with auto-close (VS Code, Obsidian, Visual Studio), send only the opening
+; char so the editor's auto-pairing works. Otherwise, insert both and place the cursor
+; between them.
+
+
+InsertPair(openChar, closeChar)
+{
+    if (WinActive(APP_VSCODE) || WinActive(APP_OBSIDIAN) || WinActive(APP_VISUAL_STUDIO))
+    {
+        ; Use Send for editor-specific behavior
+        Send(openChar)
+    }
+    else
+    {
+        ; For curly braces, use SendText to avoid Send special character parsing issues
+        if (openChar = "{" && closeChar = "}")
+        {
+            SendText("{}")
+            Sleep(50)  ; Increased delay for reliability
+            SendInput("{Left}")
+        }
+        else
+        {
+            SendInput(openChar closeChar)
+            Sleep(50)  ; Increased delay for reliability
+            SendInput("{Left}")
+        }
+    }
+}
+
 ':: InsertPair("{U+0027}", "{U+0027}") ; Single quote (') - pairs in non-editor contexts
 
 +':: InsertPair("{U+0022}", "{U+0022}") ; Shift + ' (double-quote) - pairs as "" with cursor in non-editor contexts
@@ -241,6 +274,8 @@ CleanupTimers()
 
 ; Square brackets [] with HyperKey
 [:: InsertPair("[", "]") ; Place square brackets and cursor inside (context-aware)
+
+
 
 ; CLIPBOARD OPERATIONS
 x::Send("^x") ; Cut with Hyperkey + X
@@ -515,33 +550,4 @@ g::return
 >+CapsLock::
 {
     SetCapsLockState(!GetKeyState("CapsLock", "T")) ; Toggle CapsLock state
-}
-
-; Insert a paired character (quotes, brackets, parentheses) depending on app context.
-; In editors with auto-close (VS Code, Obsidian, Visual Studio), send only the opening
-; char so the editor's auto-pairing works. Otherwise, insert both and place the cursor
-; between them.
-InsertPair(openChar, closeChar)
-{
-    if (WinActive(APP_VSCODE) || WinActive(APP_OBSIDIAN) || WinActive(APP_VISUAL_STUDIO))
-    {
-        ; Use Send for editor-specific behavior
-        Send(openChar)
-    }
-    else
-    {
-        ; For curly braces, use SendText to avoid Send special character parsing issues
-        if (openChar = "{" && closeChar = "}")
-        {
-            SendText("{}")
-            Sleep(20)
-            Send("{Left}")
-        }
-        else
-        {
-            Send(openChar closeChar)
-            Sleep(20)
-            Send("{Left}")
-        }
-    }
 }
