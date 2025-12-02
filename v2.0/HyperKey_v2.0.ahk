@@ -245,18 +245,16 @@ InsertPair(openChar, closeChar)
     }
     else
     {
-        ; Use SendEvent for maximum reliability - simulates actual keystrokes
-        SendEvent(openChar)
-        Sleep(100)  ; Longer delay for SendEvent
-        SendEvent(closeChar)
-        Sleep(100)  ; Longer delay for SendEvent
+        ; Use SendEvent for maximum reliability with longer delays
+        SendEvent(openChar closeChar)
+        Sleep(150)  ; Longer delay for reliability
         SendEvent("{Left}")
     }
 }
 
-':: InsertPair("{U+0027}", "{U+0027}") ; Single quote (') - pairs in non-editor contexts
+':: InsertPair("'", "'") ; Single quote (') - pairs in non-editor contexts
 
-+':: InsertPair("{U+0022}", "{U+0022}") ; Shift + ' (double-quote) - pairs as "" with cursor in non-editor contexts
++':: InsertPair('"', '"') ; Shift + ' (double-quote) - pairs as "" with cursor in non-editor contexts
 
 ; PARENTHESES - Context-aware behavior
 9:: InsertPair("(", ")") ; Place parentheses and cursor inside (context-aware)
